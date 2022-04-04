@@ -3,7 +3,7 @@ pipeline
     agent any
     stages
     {
-        stage('ContinuousDownload_Master')
+        stage('ContinuousDownload_Loans')
         {
             steps
             {
@@ -21,23 +21,5 @@ pipeline
                 }
             }
         }    
-        stage('ContinuousBuild_Master')
-        {
-            steps
-            {
-                script
-                {
-                    try
-                    {
-                        sh label: '', script: 'mvn package' 
-                    }
-                    catch(Exception e2)
-                    {
-                        mail bcc: '', body: 'Jenkins is unable to build artifacts form the above code', cc: '', from: '', replyTo: '', subject: 'Build Failed', to: 'dev.team@gmail.com'
-                        exit(1)
-                    }
-                }
-            }
-        }
     }
 }
